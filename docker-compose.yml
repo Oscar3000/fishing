@@ -1,16 +1,23 @@
 version: "3"
 services: 
     web:
+        container_name: fishingApi
         build: 
             context: .
             dockerfile: fishingApi/Dockerfile
         ports:
-            - "5000:80"
+            - "5000:5000"
+        volumes: 
+            - ./fishingApi:/app
         depends_on: 
-            - db
-    db:
-        image: mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-18.04
-        env_file: ./.env
+            - fishingdb
+    fishingdb:
+        #image: mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-18.04
+        image: mcr.microsoft.com/mssql/server
+        env_file: .env
+        #volumes:
+        #    - ./.db:/var/opt/mssql/
+        #    - /var/opt/mssql/data
         environment: 
             SA_PASSWORD: ${SA_PASSWORD}
             ACCEPT_EULA: ${ACCEPT_EULA}

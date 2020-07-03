@@ -13,6 +13,7 @@ using fishingApi.Data;
 using fishingApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace fishingApi
 {
@@ -53,6 +54,12 @@ namespace fishingApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                 endpoints.MapGet("/", async context =>
+                {
+                    byte[] data = Encoding.UTF8.GetBytes("Hello World!");
+                    context.Response.ContentType = "application/json";
+                    await context.Response.Body.WriteAsync(data, 0, data.Length);
+                });
             });
         }
     }

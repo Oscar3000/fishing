@@ -26,3 +26,20 @@ global tool
 - echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.bash_profile
 - echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.bashrc
 - source ~/.bashrc
+
+
+execute docker container
+- docker exec -it fishingApi /bin/bash
+
+
+build fresh copy
+- docker-compose build --no-cache
+
+for running container
+docker run -it -p 5000:5000 fishing_web
+
+build for release test project
+dotnet build -c Release -o out
+
+test release 
+dotnet test out/havbruksloggen-api.Tests.dll 
