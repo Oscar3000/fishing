@@ -1,0 +1,4 @@
+.vscode/*
+fishingApi/.vscode
+fishingApi/bin/*
+fishingApi/obj
